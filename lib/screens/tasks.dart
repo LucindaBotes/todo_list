@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -48,18 +49,44 @@ class TasksScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(
-              child: ListView(),
-              height: 300.0,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.0),
-                    topRight: Radius.circular(40.0),
-                  )),
-            ),
+            child: TaskList(),
           )
         ],
+      ),
+    );
+  }
+}
+
+class TaskList extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: ListView(
+        children: <Widget>[
+          TaskTile()
+        ],
+      ),
+      height: 300.0,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40.0),
+            topRight: Radius.circular(40.0),
+          )),
+    );
+  }
+}
+
+class TaskTile extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text('Tasks come here'),
+      trailing: Checkbox(
+        value: false,
       ),
     );
   }
