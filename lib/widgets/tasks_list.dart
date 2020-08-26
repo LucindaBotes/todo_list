@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/screens/tasks.dart';
 import 'task_tile.dart';
 import 'package:todo_list/models/task.dart';
 
 class TaskList extends StatefulWidget {
   final List<Task> tasks;
-
   TaskList(this.tasks);
 
   @override
@@ -13,11 +13,8 @@ class TaskList extends StatefulWidget {
 
 class _TaskListState extends State<TaskList> {
 
-
-
   @override
-  Widget build(
-   BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       height: 300.0,
@@ -30,14 +27,14 @@ class _TaskListState extends State<TaskList> {
       child: ListView.builder(
         itemBuilder: (context, index) {
           return TaskTile(
-            taskTitle: widget.tasks[index].name,
-            isChecked: widget.tasks[index].isDone,
-            boxCall: (boxState) {
+            delete: (){},
+              taskTitle: widget.tasks[index].name,
+              isChecked: widget.tasks[index].isDone,
+              boxCall: (boxState) {
               setState(() {
                 widget.tasks[index].toggleDone();
               });
-            }
-          );
+              });
         },
         itemCount: widget.tasks.length,
       ),

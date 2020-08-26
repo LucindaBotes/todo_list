@@ -1,20 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list/models/task.dart';
 import 'package:todo_list/widgets/tasks_list.dart';
 import 'package:todo_list/screens/add_task.dart';
-import 'package:todo_list/models/task.dart';
 
 class TasksScreen extends StatefulWidget {
+
   @override
   _TasksScreenState createState() => _TasksScreenState();
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Feed dogs'),
-    Task(name: 'Make messaging app'),
-  ];
+  final List<Task> tasks = [];
+
+  String addTask (String newTextTitle){
+    final task = Task(name: newTextTitle);
+    tasks.add(task);
+    print(newTextTitle);
+    return newTextTitle ;
+  }
+
+  void deleteTask(Task task) {
+    tasks.remove(task);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class _TasksScreenState extends State<TasksScreen> {
                             bottom: MediaQuery.of(context).viewInsets.bottom),
                         child: AddTask((newTextTitle) {
                           setState(() {
-                            tasks.add(Task(name: newTextTitle));
+                            addTask(newTextTitle);
                           });
                           Navigator.pop(context);
                         })),
