@@ -2,8 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddTask extends StatelessWidget {
+
+  final Function addTaskCall;
+
+  AddTask(this.addTaskCall);
+
   @override
   Widget build(BuildContext context) {
+    String newTextTitle;
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -34,6 +40,9 @@ class AddTask extends StatelessWidget {
               TextField(
                   autofocus: true,
                 textAlign: TextAlign.center,
+                onChanged: (newText) {
+                    newTextTitle = newText;
+                },
               ),
               SizedBox(
                 height: 30.0,
@@ -41,7 +50,9 @@ class AddTask extends StatelessWidget {
               FlatButton(
                 child: Text('Add'),
                 color: Color(0xfffccdef),
-                onPressed: () {},
+                onPressed: () {
+                  addTaskCall(newTextTitle);
+                },
               ),
             ],
           ),

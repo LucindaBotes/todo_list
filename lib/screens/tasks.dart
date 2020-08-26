@@ -2,8 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list/widgets/tasks_list.dart';
 import 'package:todo_list/screens/add_task.dart';
+import 'package:todo_list/models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: 'Buy milk'),
+    Task(name: 'Feed dogs'),
+    Task(name: 'Make messaging app'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,11 +26,16 @@ class TasksScreen extends StatelessWidget {
               context: context,
               isScrollControlled: true,
               builder: (context) => SingleChildScrollView(
-                child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: AddTask()),
-              ));
+                    child: Container(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: AddTask((newTextTitle) {
+                          setState(() {
+                            tasks.add(Task(name: newTextTitle));
+                          });
+                          Navigator.pop(context);
+                        })),
+                  ));
         },
         backgroundColor: Color(0xfffccdef),
         child: Icon(Icons.add),
@@ -45,24 +62,24 @@ class TasksScreen extends StatelessWidget {
                   height: 20.0,
                 ),
                 Text(
-                  'Todoey',
+                  'Todo',
                   style: TextStyle(
                       fontSize: 50.0,
                       color: Colors.white,
                       fontWeight: FontWeight.w500),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${tasks.length} Tasks',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18.0,
+                    fontSize: 20.0,
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: TaskList(),
+            child: TaskList(tasks),
           )
         ],
       ),
