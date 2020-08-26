@@ -30,6 +30,11 @@ class _TaskListState extends State<TaskList> {
           return TaskTile(
             taskTitle: tasks[index].name,
             isChecked: tasks[index].isDone,
+            boxCall: (boxState) {
+              setState(() {
+                tasks[index].toggleDone();
+              });
+            }
           );
         },
         itemCount: tasks.length,
