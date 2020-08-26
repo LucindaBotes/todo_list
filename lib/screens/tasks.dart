@@ -5,23 +5,17 @@ import 'package:todo_list/widgets/tasks_list.dart';
 import 'package:todo_list/screens/add_task.dart';
 
 class TasksScreen extends StatefulWidget {
-
   @override
   _TasksScreenState createState() => _TasksScreenState();
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  final List<Task> tasks = [];
+  final List<Task> tasks = List<Task>();
 
-  String addTask (String newTextTitle){
+  String addTask(String newTextTitle) {
     final task = Task(name: newTextTitle);
     tasks.add(task);
-    print(newTextTitle);
-    return newTextTitle ;
-  }
-
-  void deleteTask(Task task) {
-    tasks.remove(task);
+    return newTextTitle;
   }
 
   @override

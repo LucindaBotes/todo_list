@@ -5,6 +5,7 @@ import 'package:todo_list/models/task.dart';
 
 class TaskList extends StatefulWidget {
   final List<Task> tasks;
+
   TaskList(this.tasks);
 
   @override
@@ -27,14 +28,15 @@ class _TaskListState extends State<TaskList> {
       child: ListView.builder(
         itemBuilder: (context, index) {
           return TaskTile(
-            delete: (){},
               taskTitle: widget.tasks[index].name,
               isChecked: widget.tasks[index].isDone,
               boxCall: (boxState) {
-              setState(() {
-                widget.tasks[index].toggleDone();
-              });
-              });
+                setState(() {
+                  widget.tasks[index].toggleDone();
+                });
+              }
+
+              );
         },
         itemCount: widget.tasks.length,
       ),
